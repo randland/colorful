@@ -48,7 +48,45 @@ class String
     end
   end
 
-  private
+  def foreground(*args)
+    code = ansi_color_code *args
+    inject_ansi_code 38, 5, code
+  end
+  alias :fg :foreground
+  alias :color :foreground
+  alias :colour :foreground
+
+  def background(*args)
+    code = ansi_color_code *args
+    inject_ansi_code 48, 5, code
+  end
+  alias :bg :background
+  alias :on :background
+
+private
+  def ansi_color_code *args
+    if args.size == 3
+      ansi_rgb_color *args
+    else
+      str = args[0].to_s.sub(/^(#|_)/, '')
+      if str.size == 3
+        red, green, blue = str[0] * 2, str[1] * 2, str[2] * 2
+      elsif string.size == 6
+        red, green, blue = str[0,2], str[2,2], str[4,2]
+      else
+        raise 'Malformed color string'
+      end
+      ansi_rgb_color red.to_i(16), green.to_i(16), blue.to_i(16)
+    end
+  end
+
+  def ansi_rgb_color *args
+    red, green, blue = args
+    args.inject('') do |m,c|
+      m << (c / 256.0 * 6.0).to_i.to_s
+    end.to_i(6) + 16
+  end
+
   def inject_ansi_code *codes
     result = self
     codes.each do |code|

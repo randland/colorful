@@ -51,6 +51,65 @@ describe String do
         end
       end
     end
+
+    describe "#.ansi_rgb_color" do
+      let(:r) { 0 }
+      let(:g) { 0 }
+      let(:b) { 0 }
+
+      subject {string.send :ansi_rgb_color, r,g,b}
+
+      context 'black' do
+        it { should == 16 }
+      end
+
+      context 'red' do
+        let(:r) { 255 }
+        it { should == 196 }
+      end
+
+      context 'green' do
+        let(:g) { 255 }
+        it { should == 46 }
+      end
+
+      context 'blue' do
+        let(:b) { 255 }
+        it { should == 21 }
+      end
+
+      context 'white' do
+      let(:r) { 255 }
+      let(:g) { 255 }
+      let(:b) { 255 }
+        it { should == 231 }
+      end
+    end
+
+    describe "#foreground" do
+      context "RGB values" do
+        context "black" do
+          subject { string.foreground(0,0,0) }
+          let(:code) { '16' }
+          it { should == "\e[38;5;#{code}m#{string}\e[m" }
+        end
+        context "blue" do
+          subject { string.foreground(0,0,255) }
+          let(:code) { '21' }
+          it { should == "\e[38;5;#{code}m#{string}\e[m" }
+        end
+        context "green" do
+          subject { string.foreground(0,255,0) }
+          let(:code) { '46' }
+          it { should == "\e[38;5;#{code}m#{string}\e[m" }
+        end
+        context "red" do
+          subject { string.foreground(255,0,0) }
+          let(:code) { '196' }
+          it { should == "\e[38;5;#{code}m#{string}\e[m" }
+        end
+      end
+    end
   end
 
   context 'effects' do
