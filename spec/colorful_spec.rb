@@ -12,6 +12,17 @@ def color_codes
     :default => 9 }
 end
 
+def effect_codes
+  { :reset     => 0,
+    :bright    => 1,
+    :bold      => 1,
+    :italic    => 3,
+    :underline => 4,
+    :blink     => 5,
+    :inverse   => 7,
+    :hide      => 8 }
+end
+
 describe String do
   let(:string) { "This is a test"}
 
@@ -42,4 +53,17 @@ describe String do
     end
   end
 
+  context 'effects' do
+    effect_codes.each do |effect, code|
+      describe "##{effect}" do
+        subject { string.send effect }
+        it { should == "\e[#{code}m#{string}\e[m" }
+      end
+
+      describe "#no_#{effect}" do
+        subject { string.send "no_#{effect}" }
+        it { should == "\e[2#{code}m#{string}\e[m" }
+      end
+    end
+  end
 end

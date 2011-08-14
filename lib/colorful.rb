@@ -10,6 +10,15 @@ module Colorful
              :cyan    => 6,
              :white   => 7,
              :default => 9 }
+
+  EFFECTS = { :reset     => 0,
+              :bright    => 1,
+              :bold      => 1,
+              :italic    => 3,
+              :underline => 4,
+              :blink     => 5,
+              :inverse   => 7,
+              :hide      => 8 }
 end
 
 class String
@@ -26,6 +35,16 @@ class String
       define_method "#{color}_on_#{bg_color}" do
         inject_ansi_code 30 + code, 40 + bg_code
       end
+    end
+  end
+
+  Colorful::EFFECTS.each do |effect, code|
+    define_method effect do
+      inject_ansi_code code
+    end
+
+    define_method "no_#{effect}" do
+      inject_ansi_code 20 + code
     end
   end
 
