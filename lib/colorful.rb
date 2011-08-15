@@ -71,7 +71,7 @@ private
       str = args[0].to_s.sub(/^(#|_)/, '')
       if str.size == 3
         red, green, blue = str[0] * 2, str[1] * 2, str[2] * 2
-      elsif string.size == 6
+      elsif str.size == 6
         red, green, blue = str[0,2], str[2,2], str[4,2]
       else
         raise 'Malformed color string'
