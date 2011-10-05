@@ -27,15 +27,16 @@ class String
       inject_ansi_code 30 + code
     end
 
-    define_method "#{color}_background" do
-      inject_ansi_code 40 + code
-    end
-
     Colorful::COLORS.each do |bg_color, bg_code|
       define_method "#{color}_on_#{bg_color}" do
         inject_ansi_code 30 + code, 40 + bg_code
       end
     end
+
+    define_method "#{color}_background" do
+      inject_ansi_code 40 + code
+    end
+
   end
 
   Colorful::EFFECTS.each do |effect, code|
