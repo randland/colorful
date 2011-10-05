@@ -2,27 +2,27 @@ Colorful is a gem that provides color and effect support to native Ruby Strings 
 
 The following code will print "Test" in red using the terminal's color scheme:
 
-  > puts "Test".red
+    puts "Test".red
 
 Background colors are also supported:
 
-  > puts "Test".blue_background
+    puts "Test".blue_background
 
 You can combine the two:
 
-  > puts "Test".red.blue_background
+    puts "Test".red.blue_background
 
 or:
 
-  > puts "Test".red_on_blue
+    puts "Test".red_on_blue
 
 Add some effects:
 
-  > puts "Test".red_on_blue.blink.underline
+    puts "Test".red_on_blue.blink.underline
 
 And then remove some:
 
-  > puts "Test".red_on_blue.blink.underline.no_blink
+    puts "Test".red_on_blue.blink.underline.no_blink
 
 The supported terminal colors are:
 
