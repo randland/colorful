@@ -25,15 +25,16 @@ And then remove some:
   > puts "Test".red_on_blue.blink.underline.no_blink
 
 The supported terminal colors are:
-* black
-* red
-* green
-* yellow
-* blue
-* magenta
-* cyan
-* white
-* default
+
+*  black
+*  red
+*  green
+*  yellow
+*  blue
+*  magenta
+*  cyan
+*  white
+*  default
 
 The supported effects are:
 * reset
