@@ -19,6 +19,12 @@ module Colorful
               :blink     => 5,
               :inverse   => 7,
               :hide      => 8 }
+
+  MOVEMENT = { :up    => 'F',
+               :down  => 'E',
+               :left  => 'D',
+               :right => 'C',
+               :to    => 'G' }
 end
 
 class String
@@ -46,6 +52,13 @@ class String
 
     define_method "no_#{effect}" do
       inject_ansi_code 20 + code
+    end
+  end
+
+  Colorful::MOVEMENT.each do |move, code|
+    define_method "and_go_#{move}" do |num|
+      result = self
+      result += "\e[#{num}#{code}"
     end
   end
 

@@ -69,4 +69,25 @@ These methods handle standard or shortened HTML codes, case insensitive, with or
 
 Note that these methods require xterm 256 color support, and colors will be translated to the nearest possible valid color.
 
+Lastly, some methods have been added that allow for cursor movement.  The supported movement operations include:
+*  and_go_up(n)
+*  and_go_down(n)
+*  and_go_left(n)
+*  and_go_right(n)
+*  and_go_to(n)
+
+To return to the beginning of the line:
+
+    10.times do |n|
+      print n.to_s.and_go_to 0
+    end
+
+or:
+
+    10.times do |n|
+      puts n.to_s.and_go_up 1
+    end
+
+Note that some methods work better with puts, and others with print.  Puts will implicitly add a new line to the end of the string it is printing, moving the cursor.
+
 This is a work in progress but is stable.  Let me know if you would like a feature added to the project.
