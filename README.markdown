@@ -1,4 +1,12 @@
+# Background
+
 Colorful is a gem that provides color and effect support to native Ruby Strings when printed in an ANSI color supporting terminal.
+
+# Getting Started
+
+Either `gem install colorful` or add `gem 'colorful'` to your `Gemfile` if you're using bundler.
+
+# Usage
 
 The following code will print "Test" in red using the terminal's color scheme:
 
